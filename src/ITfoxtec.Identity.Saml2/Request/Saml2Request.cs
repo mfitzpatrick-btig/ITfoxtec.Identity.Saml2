@@ -228,7 +228,7 @@ namespace ITfoxtec.Identity.Saml2
         private void ValidateXmlSignature(SignatureValidation documentValidationResult)
         {
             var assertionElement = GetAssertionElement();
-            if(assertionElement == null)
+            if(assertionElement == null || this.Config.OnlyValidateSamlResponseDocumentRootSignature)
             {
                 if (documentValidationResult != SignatureValidation.Valid)
                     throw new InvalidSignatureException("Signature is invalid.");                

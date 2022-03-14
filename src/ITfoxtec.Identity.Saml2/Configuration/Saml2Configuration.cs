@@ -25,7 +25,7 @@ namespace ITfoxtec.Identity.Saml2
         public Uri SingleLogoutDestination { get; set; }
 
         public string SignatureAlgorithm { get; set; } = Saml2SecurityAlgorithms.RsaSha256Signature;
-        public string XmlCanonicalizationMethod { get; set; } = SignedXml.XmlDsigExcC14NTransformUrl;        
+        public string XmlCanonicalizationMethod { get; set; } = SignedXml.XmlDsigExcC14NTransformUrl;
 
         public X509Certificate2 SigningCertificate { get; set; }
         public X509Certificate2 DecryptionCertificate { get; set; }
@@ -62,6 +62,12 @@ namespace ITfoxtec.Identity.Saml2
         /// </summary>
         public bool SignAuthnRequest { get; set; } = false;
 
+        /// <summary>
+        /// AWS SSO puts invalid signatures on their assertions, but the assertions are contained within
+        /// the overall response document which is has a valid signature on it.  In those cases we can just
+        /// validate the signature of the overall document.
+        /// </summary>
+        public bool OnlyValidateSamlResponseDocumentRootSignature { get; set; }
         /// <summary>
         /// Sign type for the authn responses created by the library.
         /// </summary>
