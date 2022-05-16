@@ -3,7 +3,6 @@ using ITfoxtec.Identity.Saml2.Schemas;
 using ITfoxtec.Identity.Saml2.MvcCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,6 +12,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens.Saml2;
 using TestIdPCore.Models;
 using ITfoxtec.Identity.Saml2.Schemas.Metadata;
+#if DEBUG
+using System.Diagnostics;
+#endif
 
 namespace TestIdPCore.Controllers
 {
@@ -20,7 +22,6 @@ namespace TestIdPCore.Controllers
     [Route("Auth")]
     public class AuthController : Controller
     {
-        const string relayStateReturnUrl = "ReturnUrl";
         private readonly Settings settings;
         private readonly Saml2Configuration config;
 
